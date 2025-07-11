@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>JavaScript program that debounces the input event of a text box to wait before making an API call.</title>
+</head>
+<body>
+  <h2>JavaScript program that debounces the input event of a text box to wait before making an API call.</h2>
+  <script>
+    // Debounce function using setTimeout
+    function debounce(callback, delay) {
+      let timer; // Variable to store the timeout ID
+
+      return function (...args) {
+        clearTimeout(timer); // Clear the previous timeout
+        timer = setTimeout(() => callback(...args), delay); // Set a new timeout
+      };
+    }
+
+    // Input event callback
+    function handleInput(event) {
+      console.log('API call for:', event.target.value); // Simulate API call
+    }
+
+    // Create the input element
+    const inputBox = document.createElement('input');
+    inputBox.type = 'text';
+    inputBox.placeholder = 'Type something...';
+    inputBox.style.padding = '10px';
+    inputBox.style.fontSize = '16px';
+    inputBox.style.width = '300px';
+
+    // Add input box to the DOM
+    document.body.appendChild(inputBox);
+
+    // Attach debounced input listener
+    inputBox.addEventListener('input', debounce(handleInput, 300));
+  </script>
+</body>
+</html>

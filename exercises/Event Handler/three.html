@@ -1,0 +1,33 @@
+ <!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .my-element {
+      width: 200px;
+      height: 200px;
+      background-color: lightgray;
+    }
+  </style>
+</head>
+<body>
+    <!--change the color with de cursor-->
+  <div id="myDiv" class="my-element"></div>
+
+  <script>
+    function changeBackgroundColor(elementId, color) {
+      //takes the element ID  
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.addEventListener('mouseenter', () => {
+            //chamge the background color 
+          element.style.backgroundColor = color;
+        });
+      }
+    }
+
+    // Call the function with element ID and desired color
+    changeBackgroundColor('myDiv', 'pink');
+  </script>
+</body>
+</html>
+

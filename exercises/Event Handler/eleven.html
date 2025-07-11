@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript event delegation for dinamic list items</title>
+  <style>
+    ul {
+      font-family: Arial, sans-serif;
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+    li {
+      cursor: pointer;
+      margin: 5px 0;
+    }
+    li:hover {
+      color: rgb(224, 153, 255);
+    }
+  </style>
+</head>
+<body>
+
+  <script>
+    // Create the parent element
+    const listContainer = document.createElement('ul');
+    listContainer.id = 'dynamic-list';
+    document.body.appendChild(listContainer); // Add the parent container to the DOM
+
+    // Function to add list items
+    function addListItem(content) {
+      const listItem = document.createElement('li'); // Create a new list item
+      listItem.textContent = content; // Set its content
+      listContainer.appendChild(listItem); // Append it to the parent container
+    }
+
+    // Dynamically add items
+    ['Apple', 'Banana', 'Cherry'].forEach((item) => addListItem(item));
+
+    // Using the onclick property to handle events
+    listContainer.onclick = (event) => {
+      if (event.target.tagName === 'LI') { // Verify it's a list item
+        console.log(`Clicked item: ${event.target.textContent}`); // Log the clicked item
+      }
+    };
+  </script>
+
+</body>
+</html>

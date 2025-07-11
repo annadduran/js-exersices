@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /*styles switch*/
+    .toggle {
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+      position: relative;
+      border-radius: 34px;
+      background-color: #ccd;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+
+    /*inner circle of the switch*/
+    .toggle::before {
+      content: "";
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: #fff;
+      top: 4px;
+      left: 4px;
+      transition: transform 0.3s;
+    }
+
+    .toggle.on {
+      background-color: #66bb6a;
+    }
+
+    /*move the circle to the right when it's on*/
+    .toggle.on::before {
+      transform: translateX(26px);
+    }
+  </style>
+</head>
+<body>
+    
+  <div class="toggle"></div>
+
+  <script>
+    const toggle = document.querySelector('.toggle');
+
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('on');
+    });
+  </script>
+</body>
+</html>
+

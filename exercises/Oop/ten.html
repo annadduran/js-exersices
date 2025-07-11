@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Personal Care Product</title>
+</head>
+<body>
+  <h2>Product</h2>
+  <div id="output"></div>
+
+  <script>
+    // Base class
+    class Product {
+      constructor(id, name, price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+      }
+
+      calculateTotalPrice(quantity) {
+        return this.price * quantity;
+      }
+    }
+
+    // Subclass
+    class PersonalCareProduct extends Product {
+      constructor(id, name, price, warrantyPeriod) {
+        super(id, name, price);
+        this.warrantyPeriod = warrantyPeriod;
+      }
+
+      calculateTotalPrice(quantity) {
+        const totalPrice = super.calculateTotalPrice(quantity);
+        return totalPrice + this.warrantyPeriod;
+      }
+    }
+
+    // Create an instance of the PersonalCareProduct class
+    const personalCareProduct = new PersonalCareProduct(1, 'Shampoo', 10, 2);
+
+    // Calculate the total price for 3 units
+    const totalPrice = personalCareProduct.calculateTotalPrice(3);
+
+    // Display the result in the browser
+    const outputDiv = document.getElementById('output');
+    outputDiv.innerHTML = `
+      <p><strong>Product:</strong> ${personalCareProduct.name}</p>
+      <p><strong>Unit Price:</strong> $${personalCareProduct.price}</p>
+      <p><strong>Quantity:</strong> 3</p>
+      <p><strong>Warranty Period (as cost):</strong> ${personalCareProduct.warrantyPeriod}</p>
+      <p><strong>Total Price:</strong> $${totalPrice}</p>
+    `;
+  </script>
+</body>
+</html>

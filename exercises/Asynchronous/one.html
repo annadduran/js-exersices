@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Invoke After Delay</title>
+</head>
+<body>
+
+  <h2>JavaScript function that takes a number as a parameter and throws a custom 'Error' if the number is not an integer</h2>
+
+  <script>
+    // Function that accepts a callback and invokes it after 2 seconds
+    function invokeAfterDelay(callback) {
+      setTimeout(callback, 2000); // 2000 milliseconds = 2 seconds
+    }
+
+    // Function to be called after the delay
+    function display_message() {
+      console.log('Hello!'); // Log message to console
+    }
+
+    // Invoke the display_message function after a 2-second delay
+    invokeAfterDelay(display_message);
+  </script>
+
+</body>
+</html>
