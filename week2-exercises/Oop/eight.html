@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Multiple Dogs Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .output {
+      padding: 10px;
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      max-width: 400px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Example</h1>
+
+  <div id="output1" class="output"></div>
+  <div id="output2" class="output"></div>
+
+  <script>
+    // Base Animal class
+    class Animal {
+      constructor(species, sound) {
+        this.species = species;
+        this.sound = sound;
+      }
+
+      makeSound() {
+        console.log(this.sound);
+        return this.sound;
+      }
+    }
+
+    // Dog class that extends Animal
+    class Dog extends Animal {
+      constructor(species, sound, color) {
+        super(species, sound);
+        this.color = color;
+      }
+
+      makeSound() {
+        const baseSound = super.makeSound(); // Call base class method
+        console.log(`Color: ${this.color}`);
+        return `${baseSound}<br>Color: ${this.color}`;
+      }
+    }
+
+    
+    const dog1 = new Dog('Dog', 'Woof woof!', 'Brown');
+    document.getElementById('output1').innerHTML = dog1.makeSound();
+
+    
+    const dog2 = new Dog('Dog', 'Bark bark!', 'Black');
+    document.getElementById('output2').innerHTML = dog2.makeSound();
+  </script>
+</body>
+</html>

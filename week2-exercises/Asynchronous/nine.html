@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Fetch with Timeout Example</title>
+</head>
+<body>
+  <h2>Open the console to see the fetch result or timeout</h2>
+
+  <script>
+    function fetchDataWithTimeout(url, timeout) {
+      const controller = new AbortController(); // Create an AbortController instance
+      const { signal } = controller; // Extract the signal from the controller
+
+      const timeoutId = setTimeout(() => {
+        controller.abort(); // Abort the request after the specified timeout
+      }, timeout);
+
+      return fetch(url, { signal }) // Make the fetch request with the signal
+        .then(response => {
+          clearTimeout(timeoutId); // Clear the timeout if fetch completes
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`); // Throw error if status is not ok
+          }
+          return response.json(); // Parse JSON response
+        })
+        .catch(error => {
+          if (error.name === 'AbortError') {
+            throw new Error('Request timed out.'); // Handle timeout specifically
+          } else {
+            throw error; // Throw other errors as-is
+          }
+        });
+    }
+
+    // Usage example:
+    const url = 'https://jsonplaceholder.typicode.com/posts/1';
+    //const timeoutMs = 5000;  
+    const timeoutMs = 10;  // Try this value to simulate a timeout
+    console.log("Timeout milliseconds: " + timeoutMs);
+
+    fetchDataWithTimeout(url, timeoutMs)
+      .then(data => {
+        console.log('Data:', data);
+      })
+      .catch(error => {
+        console.log('Error:', error.message);
+      });
+  </script>
+</body>
+</html>

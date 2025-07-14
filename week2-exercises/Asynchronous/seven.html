@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Fetch with Retry</title>
+</head>
+<body>
+  <h2>Check the console for results</h2>
+
+  <script>
+    // Function that fetches data and retries on failure
+    function fetchDataWithRetry(url, maxRetries) {
+      return new Promise((resolve, reject) => {
+        let retries = 0;
+        const fetchData = () => {
+          fetch(url)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then(data => resolve(data))
+            .catch(error => {
+              retries++;
+              if (retries <= maxRetries) {
+                console.log(`Request failed. Retrying (${retries}/${maxRetries})...`);
+                fetchData();
+              } else {
+                reject(new Error(`Failed after ${maxRetries} retries. Error: ${error.message}`));
+              }
+            });
+        };
+
+        fetchData();
+      });
+    }
+
+    // Usage example:
+    const apiUrl = 'https://jsonplaceholder.typicode.com/posts3'; // invalid URL to test retries
+    //const apiUrl = 'https://jsonplaceholder.typicode.com/posts'; // valid URL
+    console.log("URL-> ", apiUrl);
+    const maxRetries = 3;
+
+    fetchDataWithRetry(apiUrl, maxRetries)
+      .then(data => {
+        console.log('Fetched data:', data);
+      })
+      .catch(error => {
+        console.log('Error:', error.message);
+      });
+  </script>
+</body>
+</html>

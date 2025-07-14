@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Capturing Phase Demo</title>
+</head>
+<body>
+
+  
+  <div 
+    style="width: 200px; height: 200px; background-color: lightblue; margin-bottom: 30px;" 
+    id="parent"
+  >
+    <div 
+      style="width: 100px; height: 100px; background-color: pink; margin: auto;" 
+      id="child"
+    >
+      Child
+    </div>
+  </div>
+
+  <script>
+    //Parte 1: Elementos existentes en el HTML
+    document.getElementById('parent').addEventListener(
+      'click',
+      () => {
+        console.log('Parent clicked (Capturing phase) - HTML section');
+      },
+      true // Capturing
+    );
+
+    document.getElementById('child').addEventListener(
+      'click',
+      () => {
+        console.log('Child clicked (Capturing phase) - HTML section');
+      },
+      true // Capturing
+    );
+
+    // Parte 2: Crear elementos dinámicamente con JavaScript
+    const parentDiv = document.createElement('div');
+    const childDiv = document.createElement('div');
+
+    parentDiv.style.width = '200px';
+    parentDiv.style.height = '200px';
+    parentDiv.style.backgroundColor = 'lightblue';
+    parentDiv.style.position = 'relative';
+    parentDiv.style.marginTop = '30px';
+
+    childDiv.style.width = '100px';
+    childDiv.style.height = '100px';
+    childDiv.style.backgroundColor = 'pink';
+    childDiv.style.position = 'absolute';
+    childDiv.style.top = '50px';
+    childDiv.style.left = '50px';
+
+    parentDiv.appendChild(childDiv);
+    document.body.appendChild(parentDiv);
+
+    parentDiv.addEventListener(
+      'click',
+      () => {
+        console.log('Parent clicked (Capturing phase) - JS section');
+      },
+      true // Capturing
+    );
+
+    childDiv.addEventListener(
+      'click',
+      () => {
+        console.log('Child clicked (Capturing phase) - JS section');
+      },
+      true // Capturing
+    );
+  </script>
+
+</body>
+</html>

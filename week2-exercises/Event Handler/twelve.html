@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Form</title>
+</head>
+<body>
+
+  
+  <form>
+    <input type="text" name="username" placeholder="Enter your username" required />
+    <input type="email" name="email" placeholder="Enter your email" required />
+    <button type="submit">Submit</button>
+  </form>
+
+  <p id="confirmationMessage" style="color: green;"></p>
+
+  <script>
+    // Select the form element
+    const form = document.querySelector('form');
+
+    // Add a event for the submit event
+    form.addEventListener('submit', (event) => {
+      event.preventDefault(); // Prevent the default from submission behavior
+
+      // get input values and log them
+      const formData = new FormData(form); //create a FormData object
+
+      
+      for (let [key, value] of formData.entries()) {
+        console.log(`${key}: ${value}`);// log key-value pairs
+      }
+      confirmationMessage.textContent = 'Submitted form';
+
+    });
+  </script>
+
+</body>
+</html>

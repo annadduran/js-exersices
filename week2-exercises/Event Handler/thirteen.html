@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Event Bubbling Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <script>
+    // Create elements child and parnt
+    const parentDiv = document.createElement('div');
+    const childDiv = document.createElement('div');
+
+    // styles
+    parentDiv.style.width = '200px';
+    parentDiv.style.height = '200px';
+    parentDiv.style.backgroundColor = 'lightblue';
+    parentDiv.style.position = 'relative';
+
+    childDiv.style.width = '100px';
+    childDiv.style.height = '100px';
+    childDiv.style.backgroundColor = 'pink';
+    childDiv.style.position = 'absolute';
+    childDiv.style.top = '50px';
+    childDiv.style.left = '50px';
+
+    // Insert child in parent's body, and parent in the body of document
+    parentDiv.appendChild(childDiv);
+    document.body.appendChild(parentDiv);
+
+    
+    parentDiv.addEventListener('click', () => {
+      console.log('Parent clicked');
+    });
+
+    
+    childDiv.addEventListener('click', (event) => {
+      console.log('Child clicked');
+      event.stopPropagation(); 
+    });
+  </script>
+
+</body>
+</html>

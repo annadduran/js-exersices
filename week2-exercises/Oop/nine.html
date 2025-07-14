@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bank Branches</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    input, button {
+      margin: 5px;
+    }
+    #output {
+      margin-top: 15px;
+      background: #f5f5f5;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      max-width: 400px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Bank Branch Manager</h2>
+
+  <input type="text" id="branchInput" placeholder="Enter branch name" />
+  <button onclick="addBranch()">Add Branch</button>
+  <button onclick="removeBranch()">Remove Branch</button>
+  <button onclick="displayBranches()">Show Branches</button>
+
+  <div id="output"></div>
+
+  <script>
+    // Bank class definition
+    class Bank {
+      constructor() {
+        this.bankName = '';
+        this.branches = [];
+      }
+
+      addBranch(branch) {
+        this.branches.push(branch);
+        return `${branch} added successfully.`;
+      }
+
+      removeBranch(branch) {
+        const index = this.branches.indexOf(branch);
+        if (index !== -1) {
+          this.branches.splice(index, 1);
+          return `Branch ${branch} removed successfully.`;
+        } else {
+          return `Branch "${branch}" does not exist.`;
+        }
+      }
+
+      displayBranches() {
+        if (this.branches.length === 0) {
+          return 'No branches available.';
+        } else {
+          let result = 'List of Bank Branches:<br>';
+          this.branches.forEach((branch, index) => {
+            result += `${index + 1}. ${branch}<br>`;
+          });
+          return result;
+        }
+      }
+    }
+
+    // Create Bank instance
+    const bank = new Bank();
+
+    // DOM functions
+    function addBranch() {
+      const input = document.getElementById('branchInput').value.trim();
+      if (input) {
+        const message = bank.addBranch(input);
+        showMessage(message);
+        document.getElementById('branchInput').value = '';
+      }
+    }
+
+    function removeBranch() {
+      const input = document.getElementById('branchInput').value.trim();
+      if (input) {
+        const message = bank.removeBranch(input);
+        showMessage(message);
+        document.getElementById('branchInput').value = '';
+      }
+    }
+
+    function displayBranches() {
+      const message = bank.displayBranches();
+      showMessage(message);
+    }
+
+    function showMessage(message) {
+      document.getElementById('output').innerHTML = message;
+    }
+  </script>
+</body>
+</html>

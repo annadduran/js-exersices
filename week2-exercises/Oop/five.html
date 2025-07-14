@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Shape Area Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .output {
+      background-color: #f0f0f0;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Shape Area Calculator</h2>
+  <div class="output" id="output"></div>
+
+  <script>
+    // Base class
+    class Shape {
+      calculateArea() {
+        throw new Error("Method 'calculateArea()' must be overridden in subclasses");
+      }
+    }
+
+    // Circle class
+    class Circle extends Shape {
+      constructor(radius) {
+        super();
+        this.radius = radius;
+      }
+
+      calculateArea() {
+        return Math.PI * this.radius * this.radius;
+      }
+    }
+
+    // Rectangle class
+    class Rectangle extends Shape {
+      constructor(width, height) {
+        super();
+        this.width = width;
+        this.height = height;
+      }
+
+      calculateArea() {
+        return this.width * this.height;
+      }
+    }
+
+    // Output container
+    const outputDiv = document.getElementById('output');
+
+    // Create and calculate circle
+    const circle = new Circle(7);
+    const circleArea = circle.calculateArea();
+    console.log(`Circle Area: ${circleArea}`);
+    outputDiv.innerHTML += `<p><strong>Circle Area:</strong> ${circleArea.toFixed(2)}</p>`;
+
+    // Create and calculate rectangle
+    const rectangle = new Rectangle(8, 9);
+    const rectangleArea = rectangle.calculateArea();
+    console.log(`Rectangle Area: ${rectangleArea}`);
+    outputDiv.innerHTML += `<p><strong>Rectangle Area:</strong> ${rectangleArea}</p>`;
+  </script>
+
+</body>
+</html>

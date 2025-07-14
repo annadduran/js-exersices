@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rectangle Area and Perimeter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: fit-content;
+      background-color: #fae1ff;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Rectangle Area and Perimeter</h2>
+  <div class="result" id="output"></div>
+
+  <script>
+    // Define the Rectangle class
+    class Rectangle {
+      constructor(width, height) {
+        this.width = width;
+        this.height = height;
+      }
+
+      // Method to calculate area
+      calculateArea() {
+        return this.width * this.height;
+      }
+
+      // Method to calculate perimeter
+      calculatePerimeter() {
+        return 2 * (this.width + this.height);
+      }
+    }
+
+    // Create an instance of the Rectangle class
+    const rectangle = new Rectangle(12, 10);
+
+    // Calculate area and perimeter of the rectangle
+    const area = rectangle.calculateArea();
+    const perimeter = rectangle.calculatePerimeter();
+
+    // Display the results in the console
+    console.log(`Rectangle Area: ${area}`);
+    console.log(`Rectangle Perimeter: ${perimeter}`);
+
+    // Display the results on the web page
+    const outputDiv = document.getElementById('output');
+    outputDiv.innerHTML = `
+      <p><strong>Width:</strong> 12</p>
+      <p><strong>Height:</strong> 10</p>
+      <p><strong>Area:</strong> ${area}</p>
+      <p><strong>Perimeter:</strong> ${perimeter}</p>
+    `;
+  </script>
+
+</body>
+</html>
